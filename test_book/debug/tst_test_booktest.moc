@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'tst_test_booktest.cpp'
 **
-** Created: Sat 26. May 18:08:23 2012
+** Created: Mon 28. May 14:18:29 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -22,7 +22,7 @@ static const uint qt_meta_data_Test_bookTest[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -42,6 +42,7 @@ static const uint qt_meta_data_Test_bookTest[] = {
      132,   14,   14,   14, 0x08,
      144,   14,   14,   14, 0x08,
      156,   14,   14,   14, 0x08,
+     169,   14,   14,   14, 0x08,
 
        0        // eod
 };
@@ -51,7 +52,7 @@ static const char qt_meta_stringdata_Test_bookTest[] = {
     "cleanupTestCase()\0testCase1()\0testCase2()\0"
     "testCase3()\0testCase4()\0testCase5()\0"
     "testCase6()\0testCase7()\0testCase8()\0"
-    "testCase9()\0testCase10()\0"
+    "testCase9()\0testCase10()\0testCase11()\0"
 };
 
 void Test_bookTest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -72,6 +73,7 @@ void Test_bookTest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 9: _t->testCase8(); break;
         case 10: _t->testCase9(); break;
         case 11: _t->testCase10(); break;
+        case 12: _t->testCase11(); break;
         default: ;
         }
     }
@@ -110,9 +112,9 @@ int Test_bookTest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

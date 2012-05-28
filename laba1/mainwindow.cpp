@@ -60,6 +60,7 @@ void MainWindow::on_pushButton_clicked()
     if ((this->ui->lineEdit_5->text())!="") rating=true;
     if ((this->ui->lineEdit_2->text())!="") year=true;
 
+    if (fauthor(ui->lineEdit_4->text())){
     if (author)
     {
         if (!first)
@@ -71,7 +72,7 @@ void MainWindow::on_pushButton_clicked()
         result+="%'";
         first=false;
 
-    }
+    }}
     if (title)
     {
         if (!first)
@@ -83,6 +84,7 @@ void MainWindow::on_pushButton_clicked()
         result+="%'";
         first=false;
     }
+    if (fgenre(ui->lineEdit_3->text())){
     if (genre)
     {
         if (!first)
@@ -93,7 +95,8 @@ void MainWindow::on_pushButton_clicked()
         result+=this->ui->lineEdit_3->text();
         result+="%'";
         first=false;
-    }
+    }}
+    if (year1(ui->lineEdit_2->text()) && year2(ui->lineEdit_2->text())){
     if (year)
     {
         if (!first)
@@ -104,7 +107,8 @@ void MainWindow::on_pushButton_clicked()
         result+=this->ui->lineEdit_2->text();
         result+="%'";
         first=false;
-    }
+    }}
+    if (rating1(ui->lineEdit_5->text()) && rating2(ui->lineEdit_5->text())){
     if (rating)
     {
         if (!first)
@@ -115,7 +119,7 @@ void MainWindow::on_pushButton_clicked()
         result+=this->ui->lineEdit_5->text();
         result+="%'";
         first=false;
-    }
+    }}
 
 
     QSqlQuery query;
@@ -285,13 +289,15 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 
 }
 
+
 //FOR_TESTS
-bool MainWindow::author(QString str)
+bool MainWindow::fauthor(QString str)
 {
+    ui->lineEdit_4->setText(str);
     bool flag=true;
     try
     {
-        int mystr=str.toInt();
+        int mystr=ui->lineEdit_4->text().toInt();
     }
     catch(char* a)
     {
@@ -299,12 +305,13 @@ bool MainWindow::author(QString str)
     }
     return flag;
 }
-bool MainWindow::genre(QString str)
+bool MainWindow::fgenre(QString str)
 {
+    ui->lineEdit_3->setText(str);
     bool flag=true;
     try
     {
-        int mystr=str.toInt();
+        int mystr=ui->lineEdit_3->text().toInt();
     }
     catch(char* a)
     {
@@ -314,8 +321,9 @@ bool MainWindow::genre(QString str)
 }
 bool MainWindow::year1(QString str)
 {
+    ui->lineEdit_2->setText(str);
     bool flag;
-    if (str.toInt())
+    if (ui->lineEdit_2->text().toInt())
     {
         flag=true;
     }
@@ -324,8 +332,9 @@ bool MainWindow::year1(QString str)
 }
 bool MainWindow::year2(QString str)
 {
+    ui->lineEdit_2->setText(str);
     bool flag;
-    if (str.toInt()>1900 && str.toInt()<2012)
+    if (ui->lineEdit_2->text().toInt()>1900 && ui->lineEdit_2->text().toInt()<2012)
     {
         flag=true;
     }
@@ -334,8 +343,9 @@ bool MainWindow::year2(QString str)
 }
 bool MainWindow::rating1(QString str)
 {
+    ui->lineEdit_5->setText(str);
     bool flag;
-    if (str.toInt())
+    if (ui->lineEdit_5->text().toInt())
     {
         flag=true;
     }
@@ -344,8 +354,9 @@ bool MainWindow::rating1(QString str)
 }
 bool MainWindow::rating2(QString str)
 {
+    ui->lineEdit_5->setText(str);
     bool flag;
-    if (str.toInt()>=0 && str.toInt()<=5)
+    if (ui->lineEdit_5->text().toInt()>=0 && ui->lineEdit_5->text().toInt()<=5)
     {
         flag=true;
     }
@@ -410,4 +421,15 @@ bool MainWindow::textchange(QString str)
     QSqlQuery query;
     flag = query.exec(result);
     return flag;
+}
+int MainWindow::titlen(QString str)
+{
+  //  bool flag = false;
+    QString result="SELECT * FROM books WHERE ";
+    result+="title LIKE '%";
+    result+=str;
+    result+="%'";
+    QSqlQuery query;
+    query.exec(result);
+    return query.numRowsAffected();
 }

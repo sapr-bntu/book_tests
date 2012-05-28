@@ -31,6 +31,7 @@ private Q_SLOTS:
     void testCase8();
     void testCase9();
     void testCase10();
+    void testCase11();
 };
 
 Test_bookTest::Test_bookTest()
@@ -44,7 +45,7 @@ void Test_bookTest::cleanupTestCase()
 }
 void Test_bookTest::testCase1()
 {
-    bool flag = mw.author("Sergey Esenin");;
+    bool flag = mw.fauthor("Sergey Esenin");;
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase2()
@@ -69,12 +70,12 @@ void Test_bookTest::testCase5()
 }
 void Test_bookTest::testCase6()
 {
-    bool flag = mw.author("Learning");;
+    bool flag = mw.fgenre("Learning");;
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase7()
 {
-    bool flag = mw.title("C#11");;
+    bool flag = mw.title("C#");;
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase8()
@@ -91,6 +92,11 @@ void Test_bookTest::testCase10()
 {
     bool flag = mw.textchange("2005");;
     QCOMPARE(true, flag);
+}
+void Test_bookTest::testCase11()
+{
+    int flag = mw.titlen("C#");
+    QCOMPARE(0, flag);
 }
 
 QTEST_MAIN(Test_bookTest)

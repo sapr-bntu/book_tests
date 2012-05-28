@@ -36,8 +36,8 @@ public slots:
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
     void on_pushButton_clicked();
-    bool author(QString str);
-    bool genre(QString str);
+    bool fauthor(QString str);
+    bool fgenre(QString str);
     bool year1(QString str);
     bool year2(QString str);
     bool rating1(QString str);
@@ -46,6 +46,7 @@ public slots:
     bool insert(QString str);
     bool del(QString str);
     bool textchange(QString str);
+    int titlen(QString str);
 };
 
 #endif // MAINWINDOW_H
