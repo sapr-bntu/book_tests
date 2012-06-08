@@ -24,7 +24,8 @@ public:
 
     Ui::MainWindow *GetUi(){
         return ui;
-    };
+    }
+    ;
 	
 	
 

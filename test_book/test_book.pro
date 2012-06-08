@@ -21,4 +21,5 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 HEADERS += \
     ../laba1/ui_mainwindow.h \
     ../laba1/mainwindow.h \
-    ../laba1/delegat.h
+    ../laba1/delegat.h \
+    ../laba1/conn.h

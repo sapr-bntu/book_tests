@@ -1,10 +1,10 @@
 #include <QtCore/QString>
 #include <QtTest/QtTest>
 #include <QtCore/QCoreApplication>
-
 #include <QtGui>
 #include <QSqlDatabase>
 #include "../laba1/mainwindow.h"
+#include "../laba1/conn.h"
 
 namespace Ui {
     class MainWindow;
@@ -13,11 +13,11 @@ namespace Ui {
 class Test_bookTest : public QObject
 {
     Q_OBJECT
-    
+
 public:
     Test_bookTest();
     MainWindow mw;
-    
+
 private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
@@ -32,6 +32,7 @@ private Q_SLOTS:
     void testCase9();
     void testCase10();
     void testCase11();
+    void testCase12();
 };
 
 Test_bookTest::Test_bookTest()
@@ -45,7 +46,7 @@ void Test_bookTest::cleanupTestCase()
 }
 void Test_bookTest::testCase1()
 {
-    bool flag = mw.fauthor("Sergey Esenin");;
+    bool flag = mw.fauthor("Sergey Esenin");
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase2()
@@ -70,33 +71,38 @@ void Test_bookTest::testCase5()
 }
 void Test_bookTest::testCase6()
 {
-    bool flag = mw.fgenre("Learning");;
+    bool flag = mw.fgenre("Learning");
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase7()
 {
-    bool flag = mw.title("C#");;
+    bool flag = mw.title("C#");
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase8()
 {
-    bool flag = mw.insert("inlineedit");;
+    bool flag = mw.insert("inlineedit");
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase9()
 {
-    bool flag = mw.del("1");;
+    bool flag = mw.del("1");
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase10()
 {
-    bool flag = mw.textchange("2005");;
+    bool flag = mw.textchange("2005");
     QCOMPARE(true, flag);
 }
 void Test_bookTest::testCase11()
 {
     int flag = mw.titlen("C#");
     QCOMPARE(0, flag);
+}
+void Test_bookTest::testCase12()
+{
+    bool flag = createConnection();
+    QCOMPARE(true, flag);
 }
 
 QTEST_MAIN(Test_bookTest)

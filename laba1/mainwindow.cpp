@@ -22,9 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(1);
     createConnection();
     model= new QSqlQueryModel (this);
-  //  model->setTable("books");
-    //model->setEditStrategy(QSqlQueryModel::OnRowChange);
-   // model->select();
     model->setQuery("SELECT * FROM books");
     ui->tableView->setItemDelegate(new delegat(ui->tableView));
 
@@ -35,13 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
     model->setHeaderData(3, Qt::Horizontal, tr("Genre"));
     model->setHeaderData(4, Qt::Horizontal, tr("Year"));
     model->setHeaderData(5, Qt::Horizontal, tr("Rating"));
-
-
     this->ui->tableView->setModel(model);
-
 }
-
-
 
 MainWindow::~MainWindow()
 {
@@ -73,6 +65,13 @@ void MainWindow::on_pushButton_clicked()
         first=false;
 
     }}
+    else
+    {
+        QLabel *label;
+        label = new QLabel();
+        label->setText("Error!!! In Author.");
+        this->ui->statusBar->addWidget(label);
+    }
     if (title)
     {
         if (!first)
@@ -96,19 +95,35 @@ void MainWindow::on_pushButton_clicked()
         result+="%'";
         first=false;
     }}
-    if (year1(ui->lineEdit_2->text()) && year2(ui->lineEdit_2->text())){
-    if (year)
+    else
     {
-        if (!first)
+        QLabel *label;
+        label = new QLabel();
+        label->setText("Error!!! In Genre.");
+        this->ui->statusBar->addWidget(label);
+    }
+    if (year1(ui->lineEdit_2->text()) && year2(ui->lineEdit_2->text()) || ui->lineEdit_2->text()=="")
+    {
+        if (year)
         {
-            result+=" AND ";
+            if (!first)
+            {
+                result+=" AND ";
+            }
+            result+="year LIKE '%";
+            result+=this->ui->lineEdit_2->text();
+            result+="%'";
+            first=false;
         }
-        result+="year LIKE '%";
-        result+=this->ui->lineEdit_2->text();
-        result+="%'";
-        first=false;
-    }}
-    if (rating1(ui->lineEdit_5->text()) && rating2(ui->lineEdit_5->text())){
+    }
+    else
+    {
+        QLabel *label;
+        label = new QLabel();
+        label->setText("Error!!! In Year.");
+        this->ui->statusBar->addWidget(label);
+    }
+    if (rating1(ui->lineEdit_5->text()) && rating2(ui->lineEdit_5->text()) || ui->lineEdit_5->text()==""){
     if (rating)
     {
         if (!first)
@@ -120,6 +135,13 @@ void MainWindow::on_pushButton_clicked()
         result+="%'";
         first=false;
     }}
+    else
+    {
+        QLabel *label;
+        label = new QLabel();
+        label->setText("Error!!! In Rating.");
+        this->ui->statusBar->addWidget(label);
+    }
 
 
     QSqlQuery query;
@@ -139,8 +161,6 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_4_clicked()//reset
 {
-
-
     model->setQuery("SELECT * FROM books");
 
     model->setHeaderData(0, Qt::Horizontal, tr("Id"));
@@ -294,30 +314,17 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 bool MainWindow::fauthor(QString str)
 {
     ui->lineEdit_4->setText(str);
-    bool flag=true;
-    try
-    {
-        int mystr=ui->lineEdit_4->text().toInt();
-    }
-    catch(char* a)
-    {
-        flag=false;
-    }
-    return flag;
+    int mystr=ui->lineEdit_4->text().toInt();
+    if (mystr==0){return true;}
+    else {return false;}
 }
 bool MainWindow::fgenre(QString str)
 {
     ui->lineEdit_3->setText(str);
     bool flag=true;
-    try
-    {
-        int mystr=ui->lineEdit_3->text().toInt();
-    }
-    catch(char* a)
-    {
-        flag=false;
-    }
-    return flag;
+    int mystr=ui->lineEdit_3->text().toInt();
+    if (mystr==0){return true;}
+    else {return false;}
 }
 bool MainWindow::year1(QString str)
 {
@@ -424,7 +431,6 @@ bool MainWindow::textchange(QString str)
 }
 int MainWindow::titlen(QString str)
 {
-  //  bool flag = false;
     QString result="SELECT * FROM books WHERE ";
     result+="title LIKE '%";
     result+=str;

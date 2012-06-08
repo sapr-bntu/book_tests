@@ -69,6 +69,7 @@ static bool createConnection()
         QSqlQuery query;
         query.exec("CREATE TABLE [books] ([id] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,[title] varchar(20)  NULL,[author] varchar(20)  NULL,[genre] varchar(20)  NULL,[year] int  NULL,[rating] int  NULL,[text] VARCHAR(10000)  NULL)");
         query.first();
+        return false;
      }
     else
     {
@@ -76,9 +77,8 @@ static bool createConnection()
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName("asd.db");
         db.open();
+        return db.open();
     }
-
-    return true;
 }
 //! [0]
 
