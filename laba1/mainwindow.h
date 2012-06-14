@@ -48,6 +48,8 @@ public slots:
     bool del(QString str);
     bool textchange(QString str);
     int titlen(QString str);
+    bool if_active(QString str);
+    bool lastQuery(QString str);
 };
 
 #endif // MAINWINDOW_H

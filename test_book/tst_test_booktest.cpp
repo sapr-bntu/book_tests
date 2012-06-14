@@ -19,8 +19,6 @@ public:
     MainWindow mw;
 
 private Q_SLOTS:
-    void initTestCase();
-    void cleanupTestCase();
     void testCase1();
     void testCase2();
     void testCase3();
@@ -33,15 +31,11 @@ private Q_SLOTS:
     void testCase10();
     void testCase11();
     void testCase12();
+    void testCase13();
+    void testCase14();
 };
 
 Test_bookTest::Test_bookTest()
-{
-}
-void Test_bookTest::initTestCase()
-{
-}
-void Test_bookTest::cleanupTestCase()
 {
 }
 void Test_bookTest::testCase1()
@@ -104,7 +98,16 @@ void Test_bookTest::testCase12()
     bool flag = createConnection();
     QCOMPARE(true, flag);
 }
-
+void Test_bookTest::testCase13()
+{
+    bool flag = mw.title("C#");
+    QCOMPARE(true, flag);
+}
+void Test_bookTest::testCase14()
+{
+    bool flag = mw.lastQuery("1");
+    QCOMPARE(true, flag);
+}
 QTEST_MAIN(Test_bookTest)
 
 #include "tst_test_booktest.moc"

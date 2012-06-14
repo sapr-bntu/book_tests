@@ -321,7 +321,6 @@ bool MainWindow::fauthor(QString str)
 bool MainWindow::fgenre(QString str)
 {
     ui->lineEdit_3->setText(str);
-    bool flag=true;
     int mystr=ui->lineEdit_3->text().toInt();
     if (mystr==0){return true;}
     else {return false;}
@@ -439,3 +438,29 @@ int MainWindow::titlen(QString str)
     query.exec(result);
     return query.numRowsAffected();
 }
+bool MainWindow::if_active(QString str)
+{
+    QString result="SELECT * FROM books WHERE ";
+    result+="title LIKE '%";
+    result+=str;
+    result+="%'";
+    QSqlQuery query;
+    query.exec(result);
+    return query.isActive();//¬озвращает истину, если запрос €вл€етс€ активным
+}
+bool MainWindow::lastQuery(QString str)
+{
+    QString result="SELECT * FROM books WHERE ";
+    result+="title LIKE '%";
+    result+=str;
+    result+="%'";
+    QSqlQuery query;
+    query.exec(result);
+    query.lastQuery();
+//    qDebug()<<"yesyesyesyesyes";
+//    qDebug()<<query.lastQuery();
+    if (result=="SELECT * FROM books WHERE title LIKE '%1%'")
+    {return true;}
+    else {return false;}
+}
+
